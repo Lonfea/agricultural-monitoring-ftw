@@ -547,20 +547,7 @@ def download_and_run(tile_id: str, season: str, year: int, buffer: float = 0.1):
         check=True,
     )
 
-    subprocess.run(
-        [
-            "ftw",
-            "model",
-            "download",
-            "--type",
-            "THREE_CLASS_FULL",
-            "-o",
-            "3_Class_FULL_FTW_Pretrained.ckpt",
-        ],
-        check=True,
-    )
-
-    model_filename = "3_Class_FULL_FTW_Pretrained.ckpt"
+    model_name = "FTW_v1_3_Class_FULL"
 
     if torch.backends.mps.is_available():
         print("Running inference with MPS mode enabled")
@@ -576,7 +563,7 @@ def download_and_run(tile_id: str, season: str, year: int, buffer: float = 0.1):
                 "0",
                 "--mps_mode",
                 "--model",
-                model_filename,
+                model_name,
                 "--overwrite",
             ],
             check=True,
@@ -594,7 +581,7 @@ def download_and_run(tile_id: str, season: str, year: int, buffer: float = 0.1):
                 "--gpu",
                 "0",
                 "--model",
-                model_filename,
+                model_name,
                 "--overwrite",
             ],
             check=True,
@@ -610,7 +597,7 @@ def download_and_run(tile_id: str, season: str, year: int, buffer: float = 0.1):
                 "--out",
                 output_filename,
                 "--model",
-                model_filename,
+                model_name,
                 "--overwrite",
             ],
             check=True,
